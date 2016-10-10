@@ -15,6 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+
+
+
+
 // this will create a new page
 // to call the page up enter reddit.dev/sayhello in the URL
 Route::get('/say-hello', function () {
@@ -45,7 +50,17 @@ Route::get('say-hello/{name}', function($name) {
 	return "Hello, $name";
 });
 
+Route::get('/uppercase/{word?}', function($word = "word") {
+	return strtoupper($word);
+});
 
+Route::get('/increment/{num?}', function($num = 2) {
+	return ++$num;
+});
+
+Route::get('/add/{a?}/{b?}', function($a = 1, $b = 1) {
+	return $a + $b;
+});
 
 
 
