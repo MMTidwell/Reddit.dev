@@ -19,7 +19,7 @@ Route::get('/', function () {
 
 
 
-
+// ================ ROUTING ================
 // this will create a new page
 // to call the page up enter reddit.dev/sayhello in the URL
 Route::get('/say-hello', function () {
@@ -51,7 +51,8 @@ Route::get('say-hello/{name}', function($name) {
 });
 
 Route::get('/uppercase/{word?}', function($word = "word") {
-	return strtoupper($word);
+	$data['word'] = $word;
+	return view('uppercase')->with($data);
 });
 
 Route::get('/increment/{num?}', function($num = 2) {
@@ -61,6 +62,33 @@ Route::get('/increment/{num?}', function($num = 2) {
 Route::get('/add/{a?}/{b?}', function($a = 1, $b = 1) {
 	return $a + $b;
 });
+
+
+
+
+
+
+// ================ VIEWS ================
+Route::get('say-hello/{name}', function($name) {
+	return view('my-first-view');
+});
+
+Route::get('/say-hello/{name}', function($name) {
+	if ($name == 'tim') {
+		return Redirect::to('/');
+	}
+	$data = array('name' => $name);
+	return view('my-first-view')->with($data);
+});
+
+Route::get('/rolldice/{guess?}', function($guess = 1) {
+	$data['num'] = mt_rand(1, 6);
+	$data['guess'] = $guess;
+	$data['correct'] = ($data['num'] == $data['guess']);
+	return view('roll-dice')->with($data);
+});
+
+
 
 
 
