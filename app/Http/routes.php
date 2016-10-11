@@ -50,14 +50,15 @@ Route::get('say-hello/{name}', function($name) {
 	return "Hello, $name";
 });
 
-Route::get('/uppercase/{word?}', function($word = "word") {
-	$data['word'] = $word;
-	return view('uppercase')->with($data);
-});
+// PULLED INTO HomeController.php
+// Route::get('/uppercase/{word?}', function($word = "word") {
+// 	$data['word'] = $word;
+// 	return view('uppercase')->with($data);
+// });
 
-Route::get('/increment/{num?}', function($num = 2) {
-	return ++$num;
-});
+// Route::get('/increment/{num?}', function($num = 2) {
+// 	return ++$num;
+// });
 
 Route::get('/add/{a?}/{b?}', function($a = 1, $b = 1) {
 	return $a + $b;
@@ -81,6 +82,7 @@ Route::get('/say-hello/{name}', function($name) {
 	return view('my-first-view')->with($data);
 });
 
+
 Route::get('/rolldice/{guess?}', function($guess = 1) {
 	$data['num'] = mt_rand(1, 6);
 	$data['guess'] = $guess;
@@ -92,6 +94,16 @@ Route::get('/rolldice/{guess?}', function($guess = 1) {
 
 
 
+
+// ================ CONTROLLERS ================
+// passing the route, passing the name of the controller
+Route::get('/', 'HomeController@showWelcome');
+
+// call the page: reddit.dev/sayhello/name
+Route::get('/sayhello/{name}', 'HomeController@sayHello');
+
+Route::get('/uppercase/{word}', 'HomeController@uppercase');
+Route::get('/increment/{num}', 'HomeController@increment');
 
 
 
