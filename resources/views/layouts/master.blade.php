@@ -16,6 +16,8 @@
 
 		@yield('content')
 
+        @yield('form')
+
 
     <!-- Bootstrap core JavaScript
     ================================================== -->

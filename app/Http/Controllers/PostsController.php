@@ -27,7 +27,7 @@ class PostsController extends Controller
      */
     public function create()
     {
-        return 'create() method - Show a form for creating a post';
+        return view('posts.create');
     }
 
     /**
@@ -38,7 +38,7 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
-        return 'store() method - Store a new post';
+        return back()->withInput();
     }
 
     /**
@@ -58,9 +58,10 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // needs to return the view page that it is connected to
     public function edit($id)
     {
-        return 'edit() method - Show a form for editing a specific post';
+        return view('posts.edit');
     }
 
     /**
@@ -70,9 +71,10 @@ class PostsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
+    // returns the 
     public function update(Request $request, $id)
     {
-        return 'update() method - Update a specific post';
+        return back()->withInput();
     }
 
     /**
