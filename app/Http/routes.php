@@ -100,13 +100,27 @@ Route::get('/rolldice/{guess?}', function($guess = 1) {
 Route::get('/', 'HomeController@showWelcome');
 
 // call the page: reddit.dev/sayhello/name
+// each of these pages will need to have their own blade file
 Route::get('/sayhello/{name}', 'HomeController@sayHello');
-
 Route::get('/uppercase/{word}', 'HomeController@uppercase');
 Route::get('/increment/{num}', 'HomeController@increment');
 
-
-
+// Resource Controllers
+// this route conntects to the PostController.php file
+//index GET
+Route::resource('posts', 'PostsController');
+//create GET
+Route::resource('posts/create', 'PostsController');
+//store POST
+Route::resource('posts', 'PostsController');
+//show GET
+Route::resource('posts/{post}', 'PostsController');
+//edit GET
+Route::resource('posts/{post}/edit', 'PostsController');
+//update PUT
+Route::resource('posts/{post}', 'PostsController');
+//destory DELETE
+Route::resource('posts/{post}', 'PostsController');
 
 
 
