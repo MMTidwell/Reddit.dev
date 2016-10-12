@@ -1,5 +1,6 @@
 <?php
 
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -109,24 +110,41 @@ Route::get('/increment/{num}', 'HomeController@increment');
 // this route conntects to the PostController.php file
 //index GET
 Route::resource('posts', 'PostsController');
-//create GET
-Route::resource('posts/create', 'PostsController');
-//store POST
-Route::resource('posts', 'PostsController');
-//show GET
-Route::resource('posts/{post}', 'PostsController');
-//edit GET
-Route::resource('posts/{post}/edit', 'PostsController');
-//update PUT
-Route::resource('posts/{post}', 'PostsController');
-//destory DELETE
-Route::resource('posts/{post}', 'PostsController');
+// //create GET
+// Route::resource('posts/create', 'PostsController');
+// //store POST
+// Route::resource('posts', 'PostsController');
+// //show GET
+// Route::resource('posts/{post}', 'PostsController');
+// //edit GET
+// Route::resource('posts/{post}/edit', 'PostsController');
+// //update PUT
+// Route::resource('posts/{post}', 'PostsController');
+// //destory DELETE
+// Route::resource('posts/{post}', 'PostsController');
 
 
 
 
 
 
+// ================ ORM MODELS ================
+Route::get('orm-test', function ()
+{
+	$post1 = new \App\Models\Post();
+	$post1->title = 'Eloquent is awesome!';
+	$post1->url='https://laravel.com/docs/5.1/eloquent';
+	$post1->content  = 'It is super easy to create a new post.';
+	$post1->created_by = 1;
+	$post1->save();
+
+	$post2 = new \App\Models\Post();
+	$post2->title = 'Eloquent is really easy!';
+	$post2->url='https://laravel.com/docs/5.1/eloquent';
+	$post2->content = 'It is super easy to create a new post.';
+	$post2->created_by = 1;
+	$post2->save();
+});
 
 
 
