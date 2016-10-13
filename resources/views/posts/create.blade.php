@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('content')
-	<form method="POST" action="{{ action('PostsController@store') }}">
+	<form method="POST" action="{{ action('PostsController@store' }}">
 		{!! csrf_field() !!}
 		Title: <input type="text" name="title" value="{{ old('title') }}">
 		URL: <input type="text" name="url" value="{{ old('url') }}">

@@ -43,7 +43,7 @@ class UsersController extends Controller
         $user->save();
 
         // redirects you to action('page called')
-        return redirect()->action('UsersController@show');
+        return redirect()->action('UsersController@show', $user->id);
     }
 
     public function show($id)
@@ -60,7 +60,7 @@ class UsersController extends Controller
     {
         $user = User::find($id);
         $data = ['user' => $user];
-        return view('user.edit')->with($data);
+        return view('users.edit')->with($data);
     }
 
     public function update(Request $request, $id)

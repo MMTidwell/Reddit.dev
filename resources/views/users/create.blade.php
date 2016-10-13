@@ -1,3 +1,6 @@
+{{-- This page allows the user to be able to be created with name, email, and password. --}}
+{{--  --}}
+
 @extends('layouts.master')
 
 @section('content')

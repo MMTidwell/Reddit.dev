@@ -56,7 +56,7 @@ class PostsController extends Controller
 
         $post->save();
 
-        return redirect()->action('PostsController@show');
+        return redirect()->action('PostsController@show', $post->id);
     }
 
     /**
