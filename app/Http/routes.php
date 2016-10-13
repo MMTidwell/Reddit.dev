@@ -146,7 +146,7 @@ Route::get('orm-test', function ()
 	$post2->save();
 });
 
-
+Route::resource('users', 'UsersController');
 
 
 

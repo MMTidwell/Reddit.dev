@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('form')
+@section('content')
 	{{-- the 1 is hard-codeded in and will be changed laster when the DB is formed --}}
 	<form method="POST" action="{{ action('PostsController@update', $post->id) }}">
 		{!! csrf_field() !!}
