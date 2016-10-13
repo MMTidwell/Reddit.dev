@@ -4,10 +4,13 @@
 	<table>
 		@foreach($posts as $post) 
 			<h1>Title: {{ $post->title }}</h1>
-	        <h4><a href="{{ $post->url }}">Link</a></h4>
-	        <h4>Content: {{ $post->content }}</h4> 
+	        <p><a href="{{ $post->url }}">Link</a></p>
+	        <p>Content: {{ $post->content }}</p> 
+	        <p>Posted On: {{ $post->created_at->setTimezone('America/Chicago')->format('l, F jS Y @ h:i A') }}</p>
 	        ---------------------
 	    @endforeach
 	</table>
+
+	{!! $posts->render() !!}
 @stop
 

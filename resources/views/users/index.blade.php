@@ -8,4 +8,7 @@
 			----------------------
 		@endforeach
 	</table>
+	
+	{{-- this will build the pages for paginate --}}
+	{!! $users->render() !!}
 @stop

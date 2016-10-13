@@ -13,18 +13,40 @@
     </head>
     <style>
         body {
-            background: black;
-            color: white;
+            background: #49516F;
+            color: #8EA4D2;
         }
 
         input, textarea {
             color: black;
         }
+        
+        img {
+            width: auto;
+            height: 40px;
+            position: relative;
+            bottom: 10px;
+        }
     </style>
     <body>
 
-		@yield('content')
+        @include('layouts.part.navbar')
 
+        <div class="container">
+            @if (session()->has('SUCCESS_MESSAGE'))
+                <div class="alert alert-success">
+                    <p>{{ session('SUCCESS_MESSAGE') }}</p>
+                </div>
+            @endif
+
+            @if (session()->has('ERROR_MESSAGE'))
+                <div class="alert alert-danger">
+                    <p>{{ session('ERROR_MESSAGE') }}</p>
+                </div>
+            @endif
+
+    		@yield('content')
+        </div>
 
 
 

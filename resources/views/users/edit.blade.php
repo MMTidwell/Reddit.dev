@@ -1,3 +1,6 @@
+{{-- This page will allow you to edit a user that already exist --}}
+{{--  --}}
+
 @extends('layouts.master')
 
 @section('content')

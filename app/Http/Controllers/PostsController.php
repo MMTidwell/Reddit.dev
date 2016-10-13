@@ -19,7 +19,7 @@ class PostsController extends Controller
     public function index()
     {
         // $post = (Post::find(1));
-        $data['posts'] = Post::all();
+        $data['posts'] = Post::paginate(4);
         // this is the same as foreach ($posts->attributes as $post) {}
         // foreach($posts as $post) {
         //     echo $post->title;
@@ -47,6 +47,16 @@ class PostsController extends Controller
      */
     public function store(Request $request)
     {
+        $rules = array(
+            'title' => 'required|min:3|max:100',
+            'url' => 'required',
+            'content' => 'required'
+        );
+
+        $request->session()->flash('ERROR_MESSAGE', 'Post was not saved. Plesase see message under inputs');
+        $this->validate($request, $rules);
+        $request->session()->forget('ERROR_MESSAGE');
+
         $post = new Post();
 
         $post->title = $request->title;
@@ -55,6 +65,9 @@ class PostsController extends Controller
         $post->created_by = 1;
 
         $post->save();
+
+        // flash() - shows that the post was save successfully then on refresh it will disapear
+        $request->session()->flash('SUCCESS_MESSAGE', 'Post saved successfully');
 
         return redirect()->action('PostsController@show', $post->id);
     }
@@ -96,12 +109,24 @@ class PostsController extends Controller
     // returns the 
     public function update(Request $request, $id)
     {
+        $rules = array(
+            'title' => 'required|min:3|max:100',
+            'url' => 'required',
+            'content' => 'required'
+        );
+
+        $request->session()->flash('ERROR_MESSAGE', 'Post was not saved. Plesase see message under inputs');
+        $this->validate($request, $rules);
+        $request->session()->forget('ERROR_MESSAGE');
+
         $post = Post::find($id);
         $post->title = $request->title;
         $post->url = $request->url;
         $post->content = $request->content;
         $post->save();
 
+        $request->session()->flash('SUCCESS_MESSAGE', 'Post saved successfully');
+        
         return redirect()->action('PostsController@show', $post->id);
     }
 

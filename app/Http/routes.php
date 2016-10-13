@@ -13,7 +13,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('layouts.master');
 });
 
 
@@ -98,7 +98,7 @@ Route::get('/rolldice/{guess?}', function($guess = 1) {
 
 // ================ CONTROLLERS ================
 // passing the route, passing the name of the controller
-Route::get('/', 'HomeController@showWelcome');
+// Route::get('/', 'HomeController@showWelcome');
 
 // call the page: reddit.dev/sayhello/name
 // each of these pages will need to have their own blade file
@@ -147,6 +147,9 @@ Route::get('orm-test', function ()
 });
 
 
+
+
+Route::resource('posts', 'PostsController');
 Route::resource('users', 'UsersController');
 
 

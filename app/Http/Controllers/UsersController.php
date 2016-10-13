@@ -14,7 +14,7 @@ class UsersController extends Controller
     public function index()
     {
         // this will create an array of all the usres in the DB
-        $data['users'] = User::all();        
+        $data['users'] = User::paginate(4);        
         // returns
             // view('users.index') - file path to index.blade.php
             // ->with($data) - gives the file path the $data array
@@ -31,6 +31,14 @@ class UsersController extends Controller
     // stores the user into the DB
     public function store(Request $request)
     {
+        $rules = array(
+            'name' => 'required|min:3|max:20',
+            'email' => 'required',
+            'password' => 'required',
+        );
+
+        $this->validate($request, $rules);
+
         // creates new user
         $user = new User();
 
@@ -46,6 +54,7 @@ class UsersController extends Controller
         return redirect()->action('UsersController@show', $user->id);
     }
 
+    // shows the user by the id number
     public function show($id)
     {
         // finds the user by the $id
@@ -56,6 +65,7 @@ class UsersController extends Controller
         return view('users.show')->with($data);
     }
 
+    // allows you to edit the user by id number
     public function edit($id)
     {
         $user = User::find($id);
@@ -63,8 +73,14 @@ class UsersController extends Controller
         return view('users.edit')->with($data);
     }
 
+    // allows you to update the user by the user id
     public function update(Request $request, $id)
     {
+        $rules = array(
+            'name' => 'required|min:3|max:20',
+            'email' => 'required',
+            'password' => 'required',
+        );
         $user = User::find($id);
 
         $user->name = $request->name;
@@ -76,6 +92,7 @@ class UsersController extends Controller
         return redirect()->action('UsersController@show', $user->id);
     }
 
+    // destroys the user by user id
     public function destroy($id)
     {
         return "destroy() method - Delete a specific user";
