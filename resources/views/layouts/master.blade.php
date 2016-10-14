@@ -27,6 +27,10 @@
             position: relative;
             bottom: 10px;
         }
+        
+        li {
+            color: #4C9F70;
+        }
     </style>
     <body>
 
@@ -48,8 +52,9 @@
     		@yield('content')
         </div>
 
-
-
+        <div class="container">
+            @include('layouts.part.footer')
+        </div>
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

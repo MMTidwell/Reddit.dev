@@ -21,39 +21,6 @@ class UsersController extends Controller
         return view('users.index')->with($data);
     }
 
-    // creates the user
-    public function create()
-    {
-        // returns the view of create.blade.php
-        return view('users.create');
-    }
-
-    // stores the user into the DB
-    public function store(Request $request)
-    {
-        $rules = array(
-            'name' => 'required|min:3|max:20',
-            'email' => 'required',
-            'password' => 'required',
-        );
-
-        $this->validate($request, $rules);
-
-        // creates new user
-        $user = new User();
-
-        // calls user and pulls info using $request
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $request->password;
-
-        // saves the user in the DB
-        $user->save();
-
-        // redirects you to action('page called')
-        return redirect()->action('UsersController@show', $user->id);
-    }
-
     // shows the user by the id number
     public function show($id)
     {
@@ -95,6 +62,8 @@ class UsersController extends Controller
     // destroys the user by user id
     public function destroy($id)
     {
-        return "destroy() method - Delete a specific user";
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect('/posts');
     }
 }

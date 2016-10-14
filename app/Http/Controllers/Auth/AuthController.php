@@ -21,7 +21,16 @@ class AuthController extends Controller
     |
     */
 
+    // using traits 
+    // this will count how many times you have tried to login and failed
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
+
+    // protected $redirectPath = '/posts';
+    // this will default you to $redirectPath
+    // protected $redirectAfterLogout;
+    // this will take you to the page called
+    // protected $redirectAfterLogout = 'posts/1';
+
 
     /**
      * Create a new authentication controller instance.
@@ -31,6 +40,8 @@ class AuthController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'getLogout']);
+        // this is the same as the protected $redirectAfterLogout;
+        $this->redirectPath = action('PostsController@index');
     }
 
     /**

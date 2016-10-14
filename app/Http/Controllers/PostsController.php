@@ -8,8 +8,16 @@ use App\Models\Post;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use Illuminate\Support\Facades\Log;
+
 class PostsController extends Controller
 {
+    // this will force you to login before you can do anything
+    public function __construct()
+    {
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -54,15 +62,17 @@ class PostsController extends Controller
         );
 
         $request->session()->flash('ERROR_MESSAGE', 'Post was not saved. Plesase see message under inputs');
+        // Log::info is testing all of the key=>values in the array and returnting the ones that are true in the log file.
+        Log::info($request->all());
         $this->validate($request, $rules);
         $request->session()->forget('ERROR_MESSAGE');
 
         $post = new Post();
-
         $post->title = $request->title;
         $post->url = $request->url;
         $post->content = $request->content;
-        $post->created_by = 1;
+        // this will make it to where you do not have to hard code in the user id
+        $post->created_by = $request->user()->id;
 
         $post->save();
 
@@ -82,6 +92,11 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         $data = ['post' => $post];
+
+        if ($post == null) {
+            abort(404);
+        }
+
         return view('posts.show')->with($data);
     }
 
@@ -96,6 +111,11 @@ class PostsController extends Controller
     {
         $post = Post::find($id);
         $data = ['post' => $post];
+
+        if ($post == null) {
+            abort(404);
+        }
+
         return view('posts.edit')->with($data);
     }
 
@@ -120,13 +140,17 @@ class PostsController extends Controller
         $request->session()->forget('ERROR_MESSAGE');
 
         $post = Post::find($id);
+        if ($post == null) {
+            abort(404);
+        }
+
         $post->title = $request->title;
         $post->url = $request->url;
         $post->content = $request->content;
         $post->save();
 
         $request->session()->flash('SUCCESS_MESSAGE', 'Post saved successfully');
-        
+
         return redirect()->action('PostsController@show', $post->id);
     }
 
@@ -138,6 +162,8 @@ class PostsController extends Controller
      */
     public function destroy($id)
     {
-        return 'destroy() method - Delete a specific post';
+        $post = Post::findOrFail($id);
+        $post->delete();
+        return redirect('/posts');
     }
 }
