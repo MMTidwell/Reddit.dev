@@ -35,7 +35,7 @@ class PostsController extends Controller
             ->paginate(4);
         } else {
             // if there is nothing in the search bar then it will show the post from newest to oldest
-            $posts = Post::with('user')->orderby('created_at')->paginate(4);
+            $posts = Post::with('user')->orderby('created_at', 'desc')->paginate(4);
         }
         // this will give us the object
         // dd($posts);

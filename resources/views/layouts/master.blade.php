@@ -15,6 +15,7 @@
         body {
             background: #49516F;
             color: #8EA4D2;
+
         }
 
         input, textarea {
