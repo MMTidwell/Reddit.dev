@@ -146,14 +146,9 @@
 // 	$post2->save();
 // });
 
-
-
-
-
 // middlewere => auth - adds authentication to this route
-Route::get('/', ['middleware' => 'auth'], function () {
-    return redirect()->action('PostsController@index');
-});
+Route::get('/', 'PostsController@index');
+// change to auth
 
 Route::resource('posts', 'PostsController');
 Route::resource('users', 'UsersController', ['except' => ['create', 'store']]);

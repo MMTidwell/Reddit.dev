@@ -26,15 +26,21 @@ class PostsController extends Controller
     // this will be the first method that runs when the class is called
     public function index()
     {
-        // $post = (Post::find(1));
-        $data['posts'] = Post::paginate(4);
+        // $post = Post::find(14);
+        // $posts = Post::paginate(4);
+        $posts = Post::with('user')->paginate(4);
+        dd($posts);
+        // $user = \App\User::find(32);
+        // dd($user->posts);
+        // dd($post->user->email);
         // this is the same as foreach ($posts->attributes as $post) {}
         // foreach($posts as $post) {
         //     echo $post->title;
         //     echo $post->url;
         //     echo $post->content;
         // }
-        return view('posts.index')->with($data);
+        return view('posts.index')->with('posts', $posts);
+        // return view('posts.index', $data);
     }
 
     /**

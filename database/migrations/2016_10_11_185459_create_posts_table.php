@@ -16,12 +16,13 @@ class CreatePostsTable extends Migration
             $table->increments('id');
 
             $table->integer('created_by')->unsigned();
-            $table->foreign('created_by')->references('id')->on('users');
 
             $table->string('title');
             $table->string('url')->nullable();
             $table->longText('content');
             $table->timestamps();
+            
+            $table->foreign('created_by')->references('id')->on('users');
         });
     }
 
