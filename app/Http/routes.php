@@ -12,9 +12,9 @@
 |
 */
 
-Route::get('/', function () {
-    return redirect()->action('PostsController@index');
-});
+// Route::get('/', function () {
+//     return redirect()->action('PostsController@index');
+// });
 
 
 
@@ -23,33 +23,33 @@ Route::get('/', function () {
 // ================ ROUTING ================
 // this will create a new page
 // to call the page up enter reddit.dev/sayhello in the URL
-Route::get('/say-hello', function () {
-	$a = 4;
-	$b = 6;
-	// this is all it will put on a page
-	return "Hello, Codeup! " . $a * $b;
-});
+// Route::get('/say-hello', function () {
+// 	$a = 4;
+// 	$b = 6;
+// 	// this is all it will put on a page
+// 	return "Hello, Codeup! " . $a * $b;
+// });
 
 // stay away from capitals, use - instead
-Route::get('/say-hello/{name}', function($name)
-{
-    return "Hello, $name!";
-});
+// Route::get('/say-hello/{name}', function($name)
+// {
+//     return "Hello, $name!";
+// });
 
 // optional perams
 // hits the first path when nothing is passed in for the name
 	// so in other words comment out the first Route::get and it will work
-Route::get('/say-hello/{name?}', function($name = 'World') {
-	return "Hello, $name!";
-});
+// Route::get('/say-hello/{name?}', function($name = 'World') {
+// 	return "Hello, $name!";
+// });
 
 // redirecting to another route
-Route::get('say-hello/{name}', function($name) {
-	if ($name == "chris") {
-		return redirect('/');
-	}
-	return "Hello, $name";
-});
+// Route::get('say-hello/{name}', function($name) {
+// 	if ($name == "chris") {
+// 		return redirect('/');
+// 	}
+// 	return "Hello, $name";
+// });
 
 // PULLED INTO HomeController.php
 // Route::get('/uppercase/{word?}', function($word = "word") {
@@ -61,9 +61,9 @@ Route::get('say-hello/{name}', function($name) {
 // 	return ++$num;
 // });
 
-Route::get('/add/{a?}/{b?}', function($a = 1, $b = 1) {
-	return $a + $b;
-});
+// Route::get('/add/{a?}/{b?}', function($a = 1, $b = 1) {
+// 	return $a + $b;
+// });
 
 
 
@@ -71,25 +71,25 @@ Route::get('/add/{a?}/{b?}', function($a = 1, $b = 1) {
 
 
 // ================ VIEWS ================
-Route::get('say-hello/{name}', function($name) {
-	return view('my-first-view');
-});
+// Route::get('say-hello/{name}', function($name) {
+// 	return view('my-first-view');
+// });
 
-Route::get('/say-hello/{name}', function($name) {
-	if ($name == 'tim') {
-		return Redirect::to('/');
-	}
-	$data = array('name' => $name);
-	return view('my-first-view')->with($data);
-});
+// Route::get('/say-hello/{name}', function($name) {
+// 	if ($name == 'tim') {
+// 		return Redirect::to('/');
+// 	}
+// 	$data = array('name' => $name);
+// 	return view('my-first-view')->with($data);
+// });
 
 
-Route::get('/rolldice/{guess?}', function($guess = 1) {
-	$data['num'] = mt_rand(1, 6);
-	$data['guess'] = $guess;
-	$data['correct'] = ($data['num'] == $data['guess']);
-	return view('roll-dice')->with($data);
-});
+// Route::get('/rolldice/{guess?}', function($guess = 1) {
+// 	$data['num'] = mt_rand(1, 6);
+// 	$data['guess'] = $guess;
+// 	$data['correct'] = ($data['num'] == $data['guess']);
+// 	return view('roll-dice')->with($data);
+// });
 
 
 
@@ -102,14 +102,14 @@ Route::get('/rolldice/{guess?}', function($guess = 1) {
 
 // call the page: reddit.dev/sayhello/name
 // each of these pages will need to have their own blade file
-Route::get('/sayhello/{name}', 'HomeController@sayHello');
-Route::get('/uppercase/{word}', 'HomeController@uppercase');
-Route::get('/increment/{num}', 'HomeController@increment');
+// Route::get('/sayhello/{name}', 'HomeController@sayHello');
+// Route::get('/uppercase/{word}', 'HomeController@uppercase');
+// Route::get('/increment/{num}', 'HomeController@increment');
 
 // Resource Controllers
 // this route conntects to the PostController.php file
 //index GET
-Route::resource('posts', 'PostsController');
+// Route::resource('posts', 'PostsController');
 // //create GET
 // Route::resource('posts/create', 'PostsController');
 // //store POST
@@ -129,25 +129,31 @@ Route::resource('posts', 'PostsController');
 
 
 // ================ ORM MODELS ================
-Route::get('orm-test', function ()
-{
-	$post1 = new \App\Models\Post();
-	$post1->title = 'Eloquent is awesome!';
-	$post1->url='https://laravel.com/docs/5.1/eloquent';
-	$post1->content  = 'It is super easy to create a new post.';
-	$post1->created_by = 1;
-	$post1->save();
+// Route::get('orm-test', function ()
+// {
+// 	$post1 = new \App\Models\Post();
+// 	$post1->title = 'Eloquent is awesome!';
+// 	$post1->url='https://laravel.com/docs/5.1/eloquent';
+// 	$post1->content  = 'It is super easy to create a new post.';
+// 	$post1->created_by = 1;
+// 	$post1->save();
 
-	$post2 = new \App\Models\Post();
-	$post2->title = 'Eloquent is really easy!';
-	$post2->url='https://laravel.com/docs/5.1/eloquent';
-	$post2->content = 'It is super easy to create a new post.';
-	$post2->created_by = 1;
-	$post2->save();
+// 	$post2 = new \App\Models\Post();
+// 	$post2->title = 'Eloquent is really easy!';
+// 	$post2->url='https://laravel.com/docs/5.1/eloquent';
+// 	$post2->content = 'It is super easy to create a new post.';
+// 	$post2->created_by = 1;
+// 	$post2->save();
+// });
+
+
+
+
+
+// middlewere => auth - adds authentication to this route
+Route::get('/', ['middleware' => 'auth'], function () {
+    return redirect()->action('PostsController@index');
 });
-
-
-
 
 Route::resource('posts', 'PostsController');
 Route::resource('users', 'UsersController', ['except' => ['create', 'store']]);
