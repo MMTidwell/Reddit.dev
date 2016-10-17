@@ -26,9 +26,11 @@
                 @endif
 	  		</ul>
 	  
-		  	<form class="navbar-form navbar-right">
+	  		{{-- action called in form in order to call the index method in PostsController --}}
+		  	<form class="navbar-form navbar-right" action="{{ action('PostsController@index') }}">
 				<div class="form-group">
-			  		<input type="text" class="form-control" placeholder="Search">
+					{{-- name is set to search so it can be called in the PostsController --}}
+			  		<input type="text" class="form-control" placeholder="Search" name="search">
 				</div>
 				<button type="submit" class="btn btn-default">Submit</button>
 		  	</form>

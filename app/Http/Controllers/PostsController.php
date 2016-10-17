@@ -24,23 +24,37 @@ class PostsController extends Controller
      * @return \Illuminate\Http\Response
      */
     // this will be the first method that runs when the class is called
-    public function index()
+    public function index(Request $request)
     {
-        // $post = Post::find(14);
-        // $posts = Post::paginate(4);
-        $posts = Post::with('user')->paginate(4);
-        dd($posts);
-        // $user = \App\User::find(32);
-        // dd($user->posts);
-        // dd($post->user->email);
-        // this is the same as foreach ($posts->attributes as $post) {}
-        // foreach($posts as $post) {
-        //     echo $post->title;
-        //     echo $post->url;
-        //     echo $post->content;
-        // }
+        // if request has search
+        if($request->has('search')) {
+            $search = $request->search;
+            // searching all of the titles of the post for what is entered in the search bar
+            $posts = Post::where('title', 'LIKE', '%' . $search . '%')
+            ->orderby('created_at', 'desc')
+            ->paginate(4);
+        } else {
+            // if there is nothing in the search bar then it will show the post from newest to oldest
+            $posts = Post::with('user')->orderby('created_at')->paginate(4);
+        }
+        // this will give us the object
+        // dd($posts);
         return view('posts.index')->with('posts', $posts);
-        // return view('posts.index', $data);
+
+        // // SELECT * FROM POSTS WHERE title LIKE '%lorem%'
+        // // $posts = Post::where('column name', 'comparison', 'value'); // gets specific. if 'comparison' is left out then it will default to ==
+        // // $posts = Post::all(); // gets all
+        // $posts = Post::where('title', 'LIKE', '%lorem%') 
+        //     ->orWhere('content', 'NOT LIKE', '%lorem%')
+        //     ->orderBy('created_at')
+        //     ->take(8)// only returns the amount specified in the object
+        //     ->skip(30)// skips first 30 in the db (kinda like OFFSET in SQL)
+        //     ->get();// gets specific and ends the query
+        //     // ->first();// gets back only the first item in the object
+        //     // ->count();// gives back the count of items in the object
+        //     // ->max('created_at');// returns the row with lg value in the column
+        //     // ->sum('vote');// returns the sum of the column 
+        // dd($posts);
     }
 
     /**

@@ -147,7 +147,10 @@
 // });
 
 // middlewere => auth - adds authentication to this route
-Route::get('/', 'PostsController@index');
+Route::get('/', function() {
+	return redirect()->action('PostsController@index');
+});
+
 // change to auth
 
 Route::resource('posts', 'PostsController');

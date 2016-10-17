@@ -7,6 +7,5 @@
 	    <p>Content: {{ $post->content }}</p>
 	    <p>Posted On: {{ $post->created_at }}</p>
 	    <p>{{ $post->user->name }}</p>
-	    {{-- <p>Posted On: {{ $post->created_at->format('l, F jS Y @ h:i A') }}</p> --}}
 	</table> 
 @stop
