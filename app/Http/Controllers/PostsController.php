@@ -31,8 +31,9 @@ class PostsController extends Controller
             $search = $request->search;
             // searching all of the titles of the post for what is entered in the search bar
             $posts = Post::where('title', 'LIKE', '%' . $search . '%')
-            ->orderby('created_at', 'desc')
-            ->paginate(4);
+                ->orwhere('content', 'LIKE', '%' . $search . '%')
+                ->orderby('created_at', 'desc')
+                ->paginate(4);
         } else {
             // if there is nothing in the search bar then it will show the post from newest to oldest
             $posts = Post::with('user')->orderby('created_at', 'desc')->paginate(4);
@@ -40,21 +41,6 @@ class PostsController extends Controller
         // this will give us the object
         // dd($posts);
         return view('posts.index')->with('posts', $posts);
-
-        // // SELECT * FROM POSTS WHERE title LIKE '%lorem%'
-        // // $posts = Post::where('column name', 'comparison', 'value'); // gets specific. if 'comparison' is left out then it will default to ==
-        // // $posts = Post::all(); // gets all
-        // $posts = Post::where('title', 'LIKE', '%lorem%') 
-        //     ->orWhere('content', 'NOT LIKE', '%lorem%')
-        //     ->orderBy('created_at')
-        //     ->take(8)// only returns the amount specified in the object
-        //     ->skip(30)// skips first 30 in the db (kinda like OFFSET in SQL)
-        //     ->get();// gets specific and ends the query
-        //     // ->first();// gets back only the first item in the object
-        //     // ->count();// gives back the count of items in the object
-        //     // ->max('created_at');// returns the row with lg value in the column
-        //     // ->sum('vote');// returns the sum of the column 
-        // dd($posts);
     }
 
     /**
@@ -81,8 +67,8 @@ class PostsController extends Controller
             'content' => 'required'
         );
 
-        $request->session()->flash('ERROR_MESSAGE', 'Post was not saved. Plesase see message under inputs');
-        // Log::info is testing all of the key=>values in the array and returnting the ones that are true in the log file.
+        $request->session()->flash('ERROR_MESSAGE', 'Post was not saved. Please see message under inputs');
+        // Log::info is testing all of the key=>values in the array and returning the ones that are true in the log file.
         Log::info($request->all());
         $this->validate($request, $rules);
         $request->session()->forget('ERROR_MESSAGE');
@@ -96,7 +82,7 @@ class PostsController extends Controller
 
         $post->save();
 
-        // flash() - shows that the post was save successfully then on refresh it will disapear
+        // flash() - shows that the post was save successfully then on refresh it will disappear
         $request->session()->flash('SUCCESS_MESSAGE', 'Post saved successfully');
 
         return redirect()->action('PostsController@show', $post->id);
@@ -113,6 +99,7 @@ class PostsController extends Controller
         $post = Post::find($id);
         $data = ['post' => $post];
 
+        // if there is nothing in the $post variable then it will send you to the 404 page
         if ($post == null) {
             abort(404);
         }
@@ -155,11 +142,12 @@ class PostsController extends Controller
             'content' => 'required'
         );
 
-        $request->session()->flash('ERROR_MESSAGE', 'Post was not saved. Plesase see message under inputs');
+        $request->session()->flash('ERROR_MESSAGE', 'Post was not saved. Please see message under inputs');
         $this->validate($request, $rules);
         $request->session()->forget('ERROR_MESSAGE');
 
         $post = Post::find($id);
+        
         if ($post == null) {
             abort(404);
         }
@@ -184,6 +172,6 @@ class PostsController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->delete();
-        return redirect('/posts');
+        return back();
     }
 }

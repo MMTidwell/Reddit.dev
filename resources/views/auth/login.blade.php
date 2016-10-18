@@ -6,6 +6,7 @@
 	<div class="row">
 		<div class="col-sm-6 col-sm-offset-3">
 			<form method="POST" action="{{ action('Auth\AuthController@postLogin') }}">
+				{{-- porotects your site and DB --}}
 				{{ csrf_field() }}
 				<div class="form-group">
 			    	<label for="email">Email:</label>

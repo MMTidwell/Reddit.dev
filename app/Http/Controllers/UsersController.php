@@ -10,12 +10,10 @@ use App\Http\Controllers\Controller;
 
 class UsersController extends Controller
 {
-    // this will be the first method that is ran when the class is called
     public function index()
     {
-        // this will create an array of all the usres in the DB
+        // this will create an array of all the usres in the DB and only show 4 per page
         $data['users'] = User::paginate(4);        
-        // returns
             // view('users.index') - file path to index.blade.php
             // ->with($data) - gives the file path the $data array
         return view('users.index')->with($data);
@@ -24,10 +22,12 @@ class UsersController extends Controller
     // shows the user by the id number
     public function show($id)
     {
-        // finds the user by the $id
-        $user = User::find($id);
+        // findOrFail will go to the 404 if it fails
+        $data['user'] = User::findOrFail($id);
         // assigns key value pair to user
-        $data = ['user' => $user];
+        $data['posts'] = $data['user']->posts()
+            ->orderby('created_at', 'desc')
+            ->paginate(4);
         // sends you to show.blade.php with the $data array
         return view('users.show')->with($data);
     }
@@ -64,6 +64,6 @@ class UsersController extends Controller
     {
         $post = Post::findOrFail($id);
         $post->delete();
-        return redirect('/posts');
+        return back();
     }
 }

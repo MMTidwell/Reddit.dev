@@ -1,8 +1,7 @@
 <?php 
 
-// will discuss later, but needed in our controllers
-// defines which part of the view we are working
 namespace App\Http\Controllers;
+
 
 class HomeController extends Controller {
 	public function showWelcome() {

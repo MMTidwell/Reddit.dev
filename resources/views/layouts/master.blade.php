@@ -32,6 +32,10 @@
         li {
             color: #4C9F70;
         }
+
+        #edit_buttons {
+            margin: 5px;
+        }
     </style>
     <body>
 

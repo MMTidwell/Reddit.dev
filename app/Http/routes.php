@@ -36,7 +36,7 @@
 //     return "Hello, $name!";
 // });
 
-// optional perams
+// optional params
 // hits the first path when nothing is passed in for the name
 	// so in other words comment out the first Route::get and it will work
 // Route::get('/say-hello/{name?}', function($name = 'World') {
@@ -72,7 +72,7 @@
 
 // ================ VIEWS ================
 // Route::get('say-hello/{name}', function($name) {
-// 	return view('my-first-view');
+// 	return view('my-first-view'); // tells laravel to look for my-first-view.blade.php
 // });
 
 // Route::get('/say-hello/{name}', function($name) {
@@ -146,17 +146,21 @@
 // 	$post2->save();
 // });
 
-// middlewere => auth - adds authentication to this route
+
+
+
+
 Route::get('/', function() {
 	return redirect()->action('PostsController@index');
 });
 
-// change to auth
-
+// Routes all of the controller actions
 Route::resource('posts', 'PostsController');
 Route::resource('users', 'UsersController', ['except' => ['create', 'store']]);
 
 // Authentication routes...
+// Ties the route to the ('Controller@method')
+// '/' is kinda like a file path while '\' is like namescape
 Route::get('auth/login', 'Auth\AuthController@getLogin');
 Route::post('auth/login', 'Auth\AuthController@postLogin');
 Route::get('auth/logout', 'Auth\AuthController@getLogout');

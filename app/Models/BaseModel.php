@@ -10,11 +10,11 @@ class BaseModel extends Model
     // create accessors for created_at and updated_at so they will be converted from UT to loal time
     public function getCreatedAtAttribute($value) {
     	$utc = \Carbon\Carbon::createFromFormat($this->getDateFormat(), $value);
-    	return $utc->format('l, F jS Y @ h:i A');
+    	return $utc->setTimezone('America/Chicago');
     }
 
     public function getUpdatedAtAttribute($value) {
     	$utc = \Carbon\Carbon::createFromFormat($this->getDateFormat(), $value);
-    	return $utc->format('l, F jS Y @ h:i A') ;
+    	return $utc->setTimezone('America/Chicago') ;
     }
 }

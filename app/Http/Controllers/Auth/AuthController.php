@@ -25,12 +25,6 @@ class AuthController extends Controller
     // this will count how many times you have tried to login and failed
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-    // protected $redirectPath = '/posts';
-    // this will default you to $redirectPath
-    // protected $redirectAfterLogout;
-    // this will take you to the page called
-    // protected $redirectAfterLogout = 'posts/1';
-
 
     /**
      * Create a new authentication controller instance.
@@ -39,6 +33,7 @@ class AuthController extends Controller
      */
     public function __construct()
     {
+        // this checks to see if he user is logged in
         $this->middleware('guest', ['except' => 'getLogout']);
         // this is the same as the protected $redirectAfterLogout;
         $this->redirectPath = action('PostsController@index');
@@ -52,8 +47,12 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
+        // this will validate the user 
         return Validator::make($data, [
+            // max name length
+            // required makes sure that the field is filled in
             'name' => 'required|max:255',
+            // makes sure that emails are not already in the DB
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
         ]);
@@ -67,6 +66,7 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
+        // this will validate the user has not already been created
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
