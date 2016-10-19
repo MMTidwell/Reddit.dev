@@ -36,6 +36,8 @@
 	    @endforeach
 	</table>
 
-	{!! $posts->render() !!}
+	<div class="row text-center">
+		{!! $posts->render() !!}
+	</div>
 @stop
 

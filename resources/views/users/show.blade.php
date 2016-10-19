@@ -69,5 +69,7 @@
 		@endforeach
 	</table>
 	{{-- this will make the pagination viewable on the page --}}
-	{!! $posts->render() !!}
+	<div class="row text-center">
+		{!! $posts->render() !!}
+	</div>
 @stop

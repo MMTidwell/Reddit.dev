@@ -50,6 +50,12 @@
             margin: 5px;
             
         }
+
+        .container {
+            background-color: rgba(86, 31, 55, 0.6);
+            border-radius: 20px;
+            margin: 5%;
+        }
         </style>
     <body>
 
@@ -69,11 +75,10 @@
             @endif
 
     		@yield('content')
-        </div>
 
-        <div class="container">
-            @include('layouts.part.footer')
         </div>
+            @include('layouts.part.footer')
+
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
