@@ -5,27 +5,40 @@
 	<form method="POST" action="{{ action('PostsController@update', $post->id) }}">
 		{!! csrf_field() !!}
 		{!! method_field('PUT') !!}
+
+		{{-- EDIT TITLE --}}
 		@if ($errors->has('title'))
             <div class="alert alert-danger">
                 {{ $errors->first('title') }}
             </div>
         @endif
-		Title: <input type="text" name="title" value="{{ old('title') == null ? $post->title : old('title') }}">
+        <div class="form-group">
+        	<label for="title">Title</label>
+        	<input type="text" class="form-control" name="title" value="{{ old('title') == null ? $post->title : old('title') }}">
+        </div>
 		
+		{{-- EDIT URL --}}
 		@if ($errors->has('url'))
             <div class="alert alert-danger">
                 {{ $errors->first('url') }}
             </div>
         @endif
-		URL: <input type="text" name="url" value="{{ old('url') == null ? $post->url : old('url') }}">
+        <div class="form-group">
+        	<label for="url">URL</label>
+			<input type="text" class="form-control" name="url" value="{{ old('url') == null ? $post->url : old('url') }}">
+        </div>
 		
+		{{-- EDIT CONTENT --}}
 		@if ($errors->has('content'))
             <div class="alert alert-danger">
                 {{ $errors->first('content') }}
             </div>
         @endif
-		Content: <textarea name="content" rows="5" columns="40">{{ old('content') == null ? $post->content : old('content') }}</textarea>
+        <div class="form-group">
+        	<label for="content">Content</label>
+			<textarea class="form-control" name="content" rows="5" columns="40">{{ old('content') == null ? $post->content : old('content') }}</textarea>
+        </div>
 
-		<input type="submit">
+		<button type="submit" class="btn btn-success">Submit</button>
 	</form>
 @stop

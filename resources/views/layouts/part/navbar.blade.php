@@ -18,7 +18,7 @@
 	                {{-- Auth::id gives us the id of the logged in user --}}
 	                <li><a href="{{ action('UsersController@show', Auth::id()) }}">{{ Auth::user()->name }}</a></li>
 	                <li><a href="{{ action('PostsController@create') }}">Create Post</a></li>
-	                <li><a href="{{ action('PostsController@index') }}">Post</a></li>
+	                <li><a href="{{ action('PostsController@index') }}">Posts</a></li>
 					<li><a href="{{ action('Auth\AuthController@getLogout') }}">Logout</a></li>
                 @else
 					<li><a href="{{ action('Auth\AuthController@getLogin') }}">Login</a></li>

@@ -3,14 +3,13 @@
 @section('content')
 	<table>
 		@foreach($posts as $post) 
-			<h1>Title: {{ $post->title }}</h1>
-	        <p><a href="{{ $post->url }}">Link</a></p>
-	        <p>Content: {{ $post->content }}</p> 
-	        <p>Posted: {{ $post->created_at->diffForHumans() }}</p>
-	        <p>
-	        	<a href="posts/{{ $post->id }}">View Post</a>
-	        	<a href="users/{{ $post->user->id }}">&nbsp;&nbsp;&nbsp; {{ $post->user->name }}</a>
-	        </p>
+			<h1>{{ $post->title }}</h1>
+	        <p>{{ $post->content }}</p> 
+	        <p>{{ $post->created_at->diffForHumans() }}</p>
+
+	        <a href="{{ $post->url }}" class="btn btn-primary" id="edit_buttons" target="_blank">Link</a>
+        	<a href="posts/{{ $post->id }}" class="btn btn-primary" id="edit_buttons">View Post</a>
+        	<a href="users/{{ $post->user->id }}" class="btn btn-primary" id="edit_buttons">{{ $post->user->name }}</a>
 			<hr>
 	    @endforeach
 	</table>

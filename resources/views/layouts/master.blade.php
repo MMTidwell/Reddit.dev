@@ -10,6 +10,10 @@
 
         <!-- Bootstrap core CSS -->
         <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- THIS IS FOR THE ICONS -->
+        <!-- http://fontawesome.io/cdn/success/ -->
+        <script src="https://use.fontawesome.com/37f2d2a99c.js"></script>
     </head>
     <style>
         body {
@@ -33,8 +37,13 @@
             color: #4C9F70;
         }
 
-        #edit_buttons {
+        #edit_buttons, .delete-form; {
             margin: 5px;
+        }
+
+        .delete-form {
+            display: inline-block;
+            /*margin: 1px;*/
         }
     </style>
     <body>

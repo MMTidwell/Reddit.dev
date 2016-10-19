@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Post;
 use App\User;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -62,8 +63,8 @@ class UsersController extends Controller
     // destroys the user by user id
     public function destroy($id)
     {
-        $post = Post::findOrFail($id);
-        $post->delete();
-        return back();
+        $user = User::findOrFail($id);
+        $user->delete();
+        return redirect()->action('UsersController@index');
     }
 }

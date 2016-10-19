@@ -22,7 +22,7 @@ class CreatePostsTable extends Migration
             $table->longText('content');
             $table->timestamps();
             
-            $table->foreign('created_by')->references('id')->on('users');
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
