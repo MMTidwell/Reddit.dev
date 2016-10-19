@@ -154,7 +154,9 @@ Route::get('/', function() {
 	return redirect()->action('PostsController@index');
 });
 
+
 // Routes all of the controller actions
+Route::post('potst/vote', 'PostsController@vote');
 Route::resource('posts', 'PostsController');
 Route::resource('users', 'UsersController', ['except' => ['create', 'store']]);
 

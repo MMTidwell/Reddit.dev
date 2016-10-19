@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Models\Post;
+use App\Models\Vote;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -147,7 +148,7 @@ class PostsController extends Controller
         $request->session()->forget('ERROR_MESSAGE');
 
         $post = Post::find($id);
-        
+
         if ($post == null) {
             abort(404);
         }
@@ -173,5 +174,29 @@ class PostsController extends Controller
         $post = Post::findOrFail($id);
         $post->delete();
         return back();
+    }
+
+    public function vote(Request $request)
+    {
+        $vote = Vote::with('post')->firstOrCreate([
+            'post_id' => $request->input('post_id'), 
+            'user_id' => $request->user()->id
+        ]);
+
+        $vote->vote = $request->input('vote');
+        $vote->save();
+
+        $post = $vote->post;
+
+        $post->upVotes = $post->upVote();
+        $post->downVotes = $post->downVote();
+
+        $data = [
+            'upVotes' => $post->upVote,
+            'downVotes' => $post->downVote,
+            'vote' => $vote->vote
+        ];
+
+        return back()->with($data);
     }
 }

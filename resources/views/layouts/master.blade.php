@@ -37,15 +37,20 @@
             color: #4C9F70;
         }
 
-        #edit_buttons, .delete-form; {
+        #edit_buttons {
             margin: 5px;
         }
 
         .delete-form {
             display: inline-block;
-            /*margin: 1px;*/
         }
-    </style>
+                
+        button, i {
+            color: black;
+            margin: 5px;
+            
+        }
+        </style>
     <body>
 
         @include('layouts.part.navbar')
