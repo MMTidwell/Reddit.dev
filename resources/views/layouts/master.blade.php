@@ -55,6 +55,7 @@
             background-color: rgba(86, 31, 55, 0.6);
             border-radius: 20px;
             margin: 5%;
+            padding: 2%;
         }
         </style>
     <body>

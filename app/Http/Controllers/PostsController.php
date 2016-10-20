@@ -31,9 +31,9 @@ class PostsController extends Controller
         if($request->has('search')) {
             $search = $request->search;
             // searching all of the titles of the post for what is entered in the search bar
-            $posts = Post::where('title', 'LIKE', '%' . $search . '%')
-                ->orwhere('content', 'LIKE', '%' . $search . '%')
-                ->orderby('created_at', 'desc')
+            $posts = Post::where('posts.title', 'LIKE', '%' . $search . '%')
+                ->orwhere('posts.content', 'LIKE', '%' . $search . '%')
+                ->orderby('posts.created_at', 'desc')
                 ->paginate(4);
         } else {
             // if there is nothing in the search bar then it will show the post from newest to oldest
